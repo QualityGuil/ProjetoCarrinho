@@ -13,6 +13,9 @@
 /* Importando product card */
 @import url(./styles/product__card.css);
 
+/* Import modal */
+@import url(./styles/modal.css);
+
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     font-weight: 400;
