@@ -1,0 +1,19 @@
+/* Importando remixicons */
+@import url(https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css);
+
+/* Importando reset */
+@import url(./styles/reset.css);
+
+/* Importando header */
+@import url(./styles/header.css);
+
+/* Importando product section */
+@import url(./styles/product__section.css);
+
+/* Importando product card */
+@import url(./styles/product__card.css);
+
+body {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
