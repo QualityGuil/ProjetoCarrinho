@@ -16,6 +16,5 @@ export function getProdutos() {
             throw error; // Propaga o erro
         });
 }
-
 // O resto do código (renderização) deve ficar em outro arquivo
 // que importa esta função, para separar as responsabilidades.

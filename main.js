@@ -4,6 +4,8 @@ import { getProdutos } from './js/consumoJSON.js';
 let listaDeProdutos = [];
 let listaCarrinho = [];
 
+const CARRINHO_STORAGE_KEY = 'listaDeIdsCarrinho';
+
 // --- Lógica do Modal ---
 const shoppingCartBtn = document.querySelector('.shopping__cart');
 const modalBackdrop = document.querySelector('.modal__backdrop');
@@ -26,8 +28,29 @@ modalCloseBtn.addEventListener('click', closeModal);
 
 // --- Funções de Lógica e Renderização ---
 
+function atualizarQtdCarrinho() {
+    shoppingCartBtnNum.textContent = listaCarrinho.length;
+}
+
+function salvarCarrinhoNoLocalStorage() {
+    const listaCarrinhoJSON = JSON.stringify(listaCarrinho);
+
+    localStorage.setItem(CARRINHO_STORAGE_KEY, listaCarrinhoJSON);
+    console.log('Carrinho salvo no localStorage');
+}
+
+function carregarCarrinhoLocalStorage() {
+    const carrinhoSalvo = localStorage.getItem(CARRINHO_STORAGE_KEY);
+
+    if(carrinhoSalvo) {
+        listaCarrinho = JSON.parse(carrinhoSalvo);
+        console.log("Carrinho carregado do localStorage: ", localStorage);
+    }
+}
+
 function adicionarAoCarrinho(id) {
-    const idInt = parseInt(id, 10); // Converte o ID para número
+    const idInt = parseInt(id); // Converte o ID para número
+    // const idInt = parseInt(id, 10); // Converte o ID para número
     const itemExistente = listaCarrinho.includes(idInt);
 
     if (itemExistente) {
@@ -37,7 +60,10 @@ function adicionarAoCarrinho(id) {
     }
     console.log("Carrinho atualizado:", listaCarrinho);
     // Atualizando o número de produtos no carrinho
-    shoppingCartBtnNum.textContent = listaCarrinho.length;
+    atualizarQtdCarrinho()
+
+    salvarCarrinhoNoLocalStorage();
+
 }
 
 function renderizarCarrinho() {
@@ -103,6 +129,7 @@ function renderizarCarrinho() {
 
         descontoTotalProdutos.textContent = `R$${descontoTotal.toFixed(2)}`;
 
+        atualizarQtdCarrinho()
 
     });
 }
@@ -141,6 +168,8 @@ getProdutos()
     .then(produtos => {
         listaDeProdutos = produtos; // Preenche a variável global com os dados
         renderizarProdutosNaPagina(); // Agora, podemos renderizar!
+        carregarCarrinhoLocalStorage();
+        renderizarCarrinho();
     })
     .catch(error => {
         console.error("Não foi possível carregar e renderizar os produtos.");
