@@ -12,7 +12,7 @@
 
     <header>
 
-        <div class="shooping__cart">
+        <div class="shopping__cart">
             <i class="ri-shopping-cart-line"></i><span>0</span>
         </div>
 
@@ -24,24 +24,52 @@
 
         <div class="product__list">
 
-            <div class="product__card">
+            <!-- <div class="product__card">
 
-                <img src="./images/exemplo.webp" alt="">
+                <img src="${produto.image}" alt="">
 
                 <div class="product__card__info">
-                    <h2>Nome</h2>
-                    <p>R$150,00</p>
-                    <button><i class="ri-add-line"></i><i class="ri-shopping-cart-line"></i></button>
+                    <h2>${produto.name}</h2>
+                    <p>R$${produto.price}</p>
+                    <button class="product__add__btn" data-id="${produto.id}"><i class="ri-add-line"></i><i class="ri-shopping-cart-line"></i></button>
                 </div>
                 
-            </div>
+            </div> -->
 
         </div>
 
     </section>
 
+    <div class="modal__backdrop">
 
-    <script src="./main.js"></script>
+        <div class="modal__content">
+
+            <div class="modal__header">
+                <h2>Seu carrinho<i class="ri-shopping-cart-line"></i></h2>
+                <i class="ri-close-fill modal__close"></i>
+            </div>
+
+            <div class="modal__shopping__cart">
+                
+                <div class="shopping__card">
+                    <!-- <p class="shopping__card__name">Nome: <span class="span__shopping__card__name">Produto A</span></p>
+                    <p class="shopping__card__price">Preço: <span class="span__shopping__card__price">R$19.99</span></p>
+                    <p class="shopping__card__id">ID: <span class="span__shopping__card__price">1</span></p> -->
+                </div>
+                
+            </div>
+
+            <div class="modal__info">
+                <p>Descontos: <span class="modal__span__discounts">R$00.00</span></p>
+                <p>Total: <span class="modal__span__total">R$00.00</span></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="./main.js"></script>
+    <!-- <script type="module" src="./js/mainTeste.js"></script> -->
 </body>
 
 </html>

@@ -5,13 +5,13 @@ header {
     padding: 5px;
 }
 
-.shooping__cart {
+.shopping__cart {
     border: 1px solid;
     padding: 5px;
     cursor: pointer;
 }
 
-.shooping__cart:hover {
+.shopping__cart:hover {
     background-color: black;
     color: white;
 }

@@ -1,0 +1,82 @@
+.modal__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__content {
+    background-color: white;
+    width: 85%;
+    /* height: 25vh; */
+    min-height: 25vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 5px; */
+}
+
+.modal__close {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal__shopping__cart {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+    /* border: 1px solid red; */
+    margin: auto;
+    gap: 5px;
+}
+
+.shopping__card {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+}
+
+.shopping__card p {
+    color: gray;
+}
+
+.shopping__card span {
+    color: black;
+}
+
+.modal__info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.shopping__card__discounts {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .modal__content {
+    background-color: white;
+    width: 35%;
+    /* height: 25vh; */
+    min-height: 25vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+}
