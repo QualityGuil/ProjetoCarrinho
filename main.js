@@ -23,6 +23,7 @@ shoppingCartBtn.addEventListener('click', () => {
 function closeModal() {
     modalBackdrop.style.display = 'none';
 }
+
 modalBackdrop.addEventListener('click', closeModal);
 modalCloseBtn.addEventListener('click', closeModal);
 
@@ -42,7 +43,7 @@ function salvarCarrinhoNoLocalStorage() {
 function carregarCarrinhoLocalStorage() {
     const carrinhoSalvo = localStorage.getItem(CARRINHO_STORAGE_KEY);
 
-    if(carrinhoSalvo) {
+    if (carrinhoSalvo) {
         listaCarrinho = JSON.parse(carrinhoSalvo);
         console.log("Carrinho carregado do localStorage: ", localStorage);
     }
@@ -63,7 +64,6 @@ function adicionarAoCarrinho(id) {
     atualizarQtdCarrinho()
 
     salvarCarrinhoNoLocalStorage();
-
 }
 
 function renderizarCarrinho() {
@@ -93,45 +93,45 @@ function renderizarCarrinho() {
 
         }
 
-        const precosProdutos = document.querySelectorAll('.span__shoppingcard__price');
-        const descontosProdutos = document.querySelectorAll('.span__shoppingcard__discounts');
-        const totalProdutos = document.querySelector('.modal__span__total');
-        const descontoTotalProdutos = document.querySelector('.modal__span__discounts');
-
-        let somaTotal = 0;
-
-        precosProdutos.forEach(preco => {
-            let textoPreco = preco.textContent;
-
-            let precoLimpo = textoPreco.replace('R$', '').trim();
-
-            const valorPreco = parseFloat(precoLimpo);
-
-            somaTotal += valorPreco;
-
-        });
-
-        let descontoTotal = 0;
-
-        descontosProdutos.forEach(desconto => {
-            let textoDesconto = desconto.textContent;
-
-            let descontoLimpo = textoDesconto.replace('R$', '').trim();
-
-            let valorDesconto = parseFloat(descontoLimpo);
-
-            descontoTotal += valorDesconto;
-        })
-
-        somaTotal -= descontoTotal;
-
-        totalProdutos.textContent = `R$${somaTotal.toFixed(2)}`;
-
-        descontoTotalProdutos.textContent = `R$${descontoTotal.toFixed(2)}`;
-
-        atualizarQtdCarrinho()
+        atualizarQtdCarrinho();
 
     });
+
+    const precosProdutos = document.querySelectorAll('.span__shoppingcard__price');
+    const descontosProdutos = document.querySelectorAll('.span__shoppingcard__discounts');
+    const totalProdutos = document.querySelector('.modal__span__total');
+    const descontoTotalProdutos = document.querySelector('.modal__span__discounts');
+
+    let somaTotal = 0;
+
+    precosProdutos.forEach(preco => {
+        let textoPreco = preco.textContent;
+
+        let precoLimpo = textoPreco.replace('R$', '').trim();
+
+        const valorPreco = parseFloat(precoLimpo);
+
+        somaTotal += valorPreco;
+
+    });
+
+    let descontoTotal = 0;
+
+    descontosProdutos.forEach(desconto => {
+        let textoDesconto = desconto.textContent;
+
+        let descontoLimpo = textoDesconto.replace('R$', '').trim();
+
+        let valorDesconto = parseFloat(descontoLimpo);
+
+        descontoTotal += valorDesconto;
+    })
+
+    somaTotal -= descontoTotal;
+
+    totalProdutos.textContent = `R$${somaTotal.toFixed(2)}`;
+    descontoTotalProdutos.textContent = `R$${descontoTotal.toFixed(2)}`;
+
 }
 
 function renderizarProdutosNaPagina() {
@@ -169,8 +169,7 @@ getProdutos()
         listaDeProdutos = produtos; // Preenche a variável global com os dados
         renderizarProdutosNaPagina(); // Agora, podemos renderizar!
         carregarCarrinhoLocalStorage();
-        renderizarCarrinho();
     })
     .catch(error => {
-        console.error("Não foi possível carregar e renderizar os produtos.");
+        console.error("Não foi possível carregar e renderizar os produtos." + error);
     });
