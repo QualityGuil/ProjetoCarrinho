@@ -45,21 +45,31 @@ function carregarCarrinhoLocalStorage() {
 
     if (carrinhoSalvo) {
         listaCarrinho = JSON.parse(carrinhoSalvo);
-        console.log("Carrinho carregado do localStorage: ", localStorage);
+        // console.log("Carrinho carregado do localStorage: ", localStorage);
+        console.log("Carrinho carregado do localStorage: ", listaCarrinho);
     }
 }
 
-function adicionarAoCarrinho(id) {
+function adicionarAoCarrinho(id, buttonElement) {
     const idInt = parseInt(id); // Converte o ID para número
     // const idInt = parseInt(id, 10); // Converte o ID para número
     const itemExistente = listaCarrinho.includes(idInt);
 
     if (itemExistente) {
         listaCarrinho = listaCarrinho.filter(produtoId => produtoId !== idInt);
+        buttonElement.classList.remove('btn-active');
+        buttonElement.innerHTML = `
+        <i class="ri-add-line"></i><i class="ri-shopping-cart-line"></i>
+        `;
     } else {
         listaCarrinho.push(idInt);
+        buttonElement.classList.add('btn-active');
+        buttonElement.innerHTML = `
+        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
+        `;
     }
     console.log("Carrinho atualizado:", listaCarrinho);
+
     // Atualizando o número de produtos no carrinho
     atualizarQtdCarrinho()
 
@@ -139,7 +149,22 @@ function renderizarProdutosNaPagina() {
     productList.innerHTML = '';
 
     listaDeProdutos.forEach(produto => {
-        productList.innerHTML += `
+
+        if (listaCarrinho.includes(produto.id)) {
+            productList.innerHTML += `
+            <div class="product__card">
+                <img src="${produto.image}" alt="">
+                <div class="product__card__info">
+                    <h2>${produto.name}</h2>
+                    <p>R$${produto.price}</p>
+                    <button class="product__add__btn btn-active" data-id="${produto.id}">
+                        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
+                    </button>
+                </div>
+            </div>
+            `;
+        } else {
+            productList.innerHTML += `
             <div class="product__card">
                 <img src="${produto.image}" alt="">
                 <div class="product__card__info">
@@ -150,14 +175,18 @@ function renderizarProdutosNaPagina() {
                     </button>
                 </div>
             </div>
-        `;
+            `;
+            // console.log(`ID de cada produto listado: ${produto.id}`)
+            // console.log(listaCarrinho.includes(produto.id));
+        }
+
     });
 
     // Adiciona os listeners de clique aos botões recém-criados
     document.querySelectorAll('.product__add__btn').forEach(button => {
         button.addEventListener('click', (event) => {
             const id = event.currentTarget.dataset.id;
-            adicionarAoCarrinho(id);
+            adicionarAoCarrinho(id, button);
         });
     });
 }
@@ -167,8 +196,9 @@ function renderizarProdutosNaPagina() {
 getProdutos()
     .then(produtos => {
         listaDeProdutos = produtos; // Preenche a variável global com os dados
-        renderizarProdutosNaPagina(); // Agora, podemos renderizar!
         carregarCarrinhoLocalStorage();
+        renderizarProdutosNaPagina(); // Agora, podemos renderizar!
+        atualizarQtdCarrinho();
     })
     .catch(error => {
         console.error("Não foi possível carregar e renderizar os produtos." + error);
