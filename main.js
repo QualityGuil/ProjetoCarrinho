@@ -191,13 +191,13 @@ function renderizarProdutosNaPagina() {
     });
 }
 
-// --- Fluxo Principal da Aplicação ---
+// Fluxo Principal da Aplicação
 // Chama a função getProdutos e usa a Promise para renderizar a página
 getProdutos()
     .then(produtos => {
         listaDeProdutos = produtos; // Preenche a variável global com os dados
         carregarCarrinhoLocalStorage();
-        renderizarProdutosNaPagina(); // Agora, podemos renderizar!
+        renderizarProdutosNaPagina();
         atualizarQtdCarrinho();
     })
     .catch(error => {
