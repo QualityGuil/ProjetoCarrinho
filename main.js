@@ -58,9 +58,15 @@ function adicionarAoCarrinho(id, buttonElement) {
     if (itemExistente) {
         listaCarrinho = listaCarrinho.filter(produtoId => produtoId !== idInt);
         buttonElement.classList.remove('btn-active');
+        buttonElement.innerHTML = `
+        <i class="ri-add-line"></i><i class="ri-shopping-cart-line"></i>
+        `;
     } else {
         listaCarrinho.push(idInt);
         buttonElement.classList.add('btn-active');
+        buttonElement.innerHTML = `
+        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
+        `;
     }
     console.log("Carrinho atualizado:", listaCarrinho);
 
@@ -152,7 +158,7 @@ function renderizarProdutosNaPagina() {
                     <h2>${produto.name}</h2>
                     <p>R$${produto.price}</p>
                     <button class="product__add__btn btn-active" data-id="${produto.id}">
-                        <i class="ri-add-line"></i><i class="ri-shopping-cart-line"></i>
+                        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
                     </button>
                 </div>
             </div>

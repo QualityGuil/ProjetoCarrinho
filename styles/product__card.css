@@ -61,9 +61,8 @@
     background-color: black;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
 
-    /* Fundo começa em cima */
     .product__card__info button::before {
         content: '';
         position: absolute;
@@ -83,4 +82,4 @@
     .product__card__info button:hover {
         color: white;
     }
-}
+} */
