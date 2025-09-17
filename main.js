@@ -65,7 +65,7 @@ function adicionarAoCarrinho(id, buttonElement) {
         listaCarrinho.push(idInt);
         buttonElement.classList.add('btn-active');
         buttonElement.innerHTML = `
-        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
+        <i class="ri-close-line"></i></i><i class="ri-shopping-cart-line"></i>
         `;
     }
     console.log("Carrinho atualizado:", listaCarrinho);
@@ -158,7 +158,7 @@ function renderizarProdutosNaPagina() {
                     <h2>${produto.name}</h2>
                     <p>R$${produto.price}</p>
                     <button class="product__add__btn btn-active" data-id="${produto.id}">
-                        <i class="ri-close-large-fill"></i><i class="ri-shopping-cart-line"></i>
+                        <i class="ri-close-line"></i></i><i class="ri-shopping-cart-line"></i>
                     </button>
                 </div>
             </div>
@@ -191,13 +191,13 @@ function renderizarProdutosNaPagina() {
     });
 }
 
-// --- Fluxo Principal da Aplicação ---
+// Fluxo Principal da Aplicação
 // Chama a função getProdutos e usa a Promise para renderizar a página
 getProdutos()
     .then(produtos => {
         listaDeProdutos = produtos; // Preenche a variável global com os dados
         carregarCarrinhoLocalStorage();
-        renderizarProdutosNaPagina(); // Agora, podemos renderizar!
+        renderizarProdutosNaPagina();
         atualizarQtdCarrinho();
     })
     .catch(error => {
